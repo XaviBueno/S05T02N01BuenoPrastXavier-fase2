@@ -1,33 +1,28 @@
 package cat.itacademy.barcelonactiva.BuenoPrast.Xavier.s05.t02.n01.model.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
+
+
+
+
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
 import cat.itacademy.barcelonactiva.BuenoPrast.Xavier.s05.t02.n01.model.dto.JugadorDto;
 
 
-@Entity
-@Table(name="jugadors")
+
+@Document(value="jugadors")
 public class Jugador {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column (name="jugador_id")
 	private int idJugador;
-	
-	
-	@Column(name="nom")
 	private String nom;
-
-	@OneToMany(mappedBy = "jugador")
-	private List<Jugada> jugades;
+	private double exits;
+	private ArrayList<Jugada> jugades;
 	
 	public Jugador(int idJugador, String nom) {
 		this.idJugador = idJugador;
@@ -42,7 +37,8 @@ public class Jugador {
 		
 		this.idJugador=jugador.getIdJugador();
 		this.nom=jugador.getNom();
-		
+		this.exits=jugador.getExits();
+		this.jugades=jugador.getJugades();
 	}
 
 	public int getIdJugador() {
@@ -63,6 +59,27 @@ public class Jugador {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+
+	public double getExits() {
+		return exits;
+	}
+
+
+	public void setExits(double exits) {
+		this.exits = exits;
+	}
+
+
+	public ArrayList<Jugada> getJugades() {
+		return jugades;
+	}
+
+
+	public void setJugades(ArrayList<Jugada> jugades) {
+		this.jugades = jugades;
+	}
+	
 	
 	
 	
